@@ -57,8 +57,8 @@ message.innerHTML =
 
 // can be only on one place at a time, not on both - we can move the element within DOM
 // as a child
-//header.prepend(message);
-header.append(message);
+header.prepend(message);
+//header.append(message);
 //header.append(message.cloneNode(true)); // to have on both places
 
 // as a sibling
@@ -106,4 +106,32 @@ logo.classList.contains('c'); // not includes as it is in arrays
 // don't use - you can add only one class, and it overwrites existing classes
 logo.className = 'jonas';
 
+//////////////////////////////////////////////
+///******/// Smooth scrolling
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+btnScrollTo.addEventListener('click', e => {
+  const s1coords = section1.getBoundingClientRect(); //
+  console.log(s1coords); // we get DOMRect with properties (x, y, height, width...)
+  console.log(e.target.getBoundingClientRect()); // DOMRect of the btn we clicked
+  console.log('Current scroll X/Y', window.pageXOffset, window.pageYOffset);
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
 
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // ); // top is relative to viewport not document
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // in modern browsers
+  section1.scrollIntoView({ behavior: 'smooth' });
+});

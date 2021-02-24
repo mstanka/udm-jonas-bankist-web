@@ -6,6 +6,10 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+const nav = document.querySelector('.nav');
 
 ///////////////////////////////////////
 // Modal window
@@ -86,10 +90,6 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 ///////////////////////////////////////
 //// Tabbed component
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
-
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab');
 
@@ -99,15 +99,42 @@ tabsContainer.addEventListener('click', function (e) {
   // remove active classes
   tabs.forEach(t => t.classList.remove('operations__tab--active'));
   tabsContent.forEach(c => c.classList.remove('operations__content--active'));
-  
+
   // activate tab
   clicked.classList.add('operations__tab--active');
 
-  // activate content area 
+  // activate content area
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+///////////////////////////////////////
+//// Menu fade animation
+// handler function can take only one real argument, all the others are set to this keyword
+const handleHover = function (e) {
+  // console.log(this); // not working with arrow function
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
+
+// // mouseenter doesn't bubble, so use mouseover
+// nav.addEventListener('mouseover', function (e) {
+//   handlerHover(e, 0.5);
+// });
+// // bind methods creates a copy of a function that is called on and it will set this keyword to whatever value we pass into bind
+// // using bind it returns function and this keyword is set to 0.5
+// passing 'argument' into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5)); // this = 0.5
+nav.addEventListener('mouseout', handleHover.bind(1)); // this = 1
 
 //**************Experimenting*************************///
 //////////////////////////////////////////////

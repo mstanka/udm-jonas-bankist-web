@@ -33,7 +33,7 @@ document.addEventListener('keydown', function (e) {
 
 ///////////////////////////////////////
 // Button scrolling
-btnScrollTo.addEventListener('click', e => {
+btnScrollTo.addEventListener('click', function () {
   // const s1coords = section1.getBoundingClientRect(); //
   // console.log(s1coords); // we get DOMRect with properties (x, y, height, width...)
   // console.log(e.target.getBoundingClientRect()); // DOMRect of the btn we clicked
@@ -220,3 +220,32 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 // //   },
 // //   true
 // // );
+
+//////////////////////////////////////////////
+// ///******/// Traversing DOM
+// going downwards: child
+// const h1 = document.querySelector('h1');
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.childNodes); // NodeList: text, comments, span, br....
+// console.log(h1.children); // HTMLCollection: elements - span, br
+// h1.firstElementChild.style.color = 'white';
+// h1.lastElementChild.style.color = 'orangered';
+
+// // going upwards: parents
+// console.log(h1.parentNode);
+// h1.parentElement;
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+// // going sideways: siblings
+// h1.previousElementSibling;
+// h1.nextElementSibling;
+
+// h1.previousSibling;
+// h1.nextSibling;
+
+// console.log(h1.parentElement.children); // to get all siblings
+// [...h1.parentElement.children].forEach(el => {
+//   if (el !== h1) {
+//     el.style.transform = 'scale(0.5)';
+//   }
+// });
